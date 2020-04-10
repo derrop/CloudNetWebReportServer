@@ -50,7 +50,8 @@ public class CloudNetWebReportHandler implements IHttpHandler {
         for (Map.Entry<String, String> entry : replacements.entrySet()) {
             String value = entry.getValue() == null || entry.getValue().isEmpty() ?
                     "not available" :
-                    entry.getValue();
+                    entry.getValue().replaceAll("/</g", "&lt;").replace("/>/g", "&gt;");
+
             response = response.replace("${" + entry.getKey() + "}", value);
         }
 
